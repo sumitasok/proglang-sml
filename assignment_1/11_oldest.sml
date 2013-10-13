@@ -3,8 +3,6 @@ fun oldest(date_list : (int * int * int) list) =
   then NONE
   else
     let
-      (*val date1 = hd date_list*)
-      (*val date2 = hd (tl date_list)*)
       fun is_older(date1 : int * int * int, date2 : int * int * int) =
         if #1 date1 < #1 date2 then true else 
           if #1 date1 > #1 date2 then false else

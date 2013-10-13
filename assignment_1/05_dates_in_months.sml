@@ -17,10 +17,8 @@ fun remaining_list (list_set : (int * int * int ) list, list_sub_set : (int * in
     if list_include(list_sub_set, hd list_set) then remaining_list(tl list_set, list_sub_set) else (hd list_set)::remaining_list(tl list_set, list_sub_set)
 
 fun dates_in_month (dates_list : ( int * int * int ) list, month : int) =
-  if null dates_list
-  then []
-  else
-    if #3 (hd dates_list) > 0 andalso #3 (hd dates_list) < month_day_max_limit(month)
+  if null dates_list then [] else
+    if #2 (hd dates_list) = month
     then (hd dates_list)::dates_in_month(tl dates_list, month)
     else dates_in_month(tl dates_list, month)
 
@@ -32,24 +30,11 @@ fun dates_in_months (dates_list : ( int * int * int ) list, months : int list) =
 (*val dates_in_months = fn : (int * int * int) list * int list -> (int * int * int) list*)
 
 val date_list1 = dates_in_months([(2013,09,31),(2013,09,21),(2013,09,51)], [2,3]); (* val date_list1 = [(2013,9,10)] : (int * int * int) list *)
-val date_list2 = dates_in_months([(2013,09,10),(2013,09,41),(2013,09,51),(2013,09,20)], [1,2]); (* val date_list1 = [(2013,9,10),(2013,9,20)] : (int * int * int) list *)
-val date_list3 = dates_in_months([(2013,02,31),(2013,09,21),(2013,09,51),(2013,09,20)], [2,3]); (* val date_list1 = [(2013,9,21),(2013,9,20)] : (int * int * int) list *)
+val date_list2 = dates_in_months([(2013,09,10),(2013,02,41),(2013,02,51),(2013,02,20)], [1,2]); (* val date_list1 = [(2013,9,10),(2013,9,20)] : (int * int * int) list *)
+val date_list3 = dates_in_months([(2013,02,31),(2013,09,21),(2013,09,51),(2013,03,20)], [2,3]); (* val date_list1 = [(2013,9,21),(2013,9,20)] : (int * int * int) list *)
 
 
 (*
-  val month_day_max_limit = fn : int -> int
-  val dates_in_month = fn
-    : (int * int * int) list * int -> (int * int * int) list
-  val dates_in_months = fn
-    : (int * int * int) list * int list -> (int * int * int) list
-  val date_list1 = [(2013,9,21),(2013,9,21)] : (int * int * int) list
-  val date_list2 = [(2013,9,10),(2013,9,20),(2013,9,10),(2013,9,20)]
-    : (int * int * int) list
-  val date_list3 = [(2013,9,21),(2013,9,20),(2013,9,21),(2013,9,20)]
-    : (int * int * int) list
-
-    with remaining_list method added
-
   val month_day_max_limit = fn : int -> int
   val list_include = fn : (int * int * int) list * (int * int * int) -> bool
   val remaining_list = fn
@@ -58,7 +43,8 @@ val date_list3 = dates_in_months([(2013,02,31),(2013,09,21),(2013,09,51),(2013,0
     : (int * int * int) list * int -> (int * int * int) list
   val dates_in_months = fn
     : (int * int * int) list * int list -> (int * int * int) list
-  val date_list1 = [(2013,9,21)] : (int * int * int) list
-  val date_list2 = [(2013,9,10),(2013,9,20)] : (int * int * int) list
-  val date_list3 = [(2013,9,21),(2013,9,20)] : (int * int * int) list
+  val date_list1 = [] : (int * int * int) list
+  val date_list2 = [(2013,2,41),(2013,2,51),(2013,2,20)]
+    : (int * int * int) list
+  val date_list3 = [(2013,2,31),(2013,3,20)] : (int * int * int) list
 *)

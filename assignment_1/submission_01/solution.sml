@@ -110,13 +110,13 @@ fun reasonable_date(date : int * int * int) =
   let
     val year = #1 date
     val month = #2 date
+
+    fun divisible_by(value : int, by : int) =
+      if value >= by then divisible_by(value - by, by) else
+        if value = 0 then true else false
+
     fun is_leap_year(year : int) = 
-      let
-        val remain = year - 4
-      in
-        if remain = 4 then true else
-          if remain > 4 then is_leap_year(remain) else false
-      end
+      if (divisible_by(year, 400) orelse divisible_by(year, 4) andalso (not(divisible_by(year, 100)))) then true else false
 
     fun month_day_max_limit (month : int) =
       if month = 4 orelse month = 6 orelse month = 9 orelse month = 11 then 30 else
